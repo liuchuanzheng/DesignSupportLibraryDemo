@@ -34,7 +34,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ObjectAnimator animator = ObjectAnimator.ofFloat(view, "translationZ", 20, 0);
+                //跳两下
+                ObjectAnimator animator = ObjectAnimator.ofFloat(view, "translationZ", 0, 100,0,100,0);
+                animator.setDuration(1000);
                 animator.addListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {

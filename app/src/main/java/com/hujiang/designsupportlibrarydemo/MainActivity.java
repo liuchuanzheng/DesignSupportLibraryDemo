@@ -34,28 +34,31 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //得到标题栏
         final ActionBar ab = getSupportActionBar();
+        //设置标题栏左侧按钮图标
         ab.setHomeAsUpIndicator(R.drawable.ic_menu);
+        //设置左侧图标可见
         ab.setDisplayHomeAsUpEnabled(true);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.dl_main_drawer);
-        NavigationView navigationView =
-                (NavigationView) findViewById(R.id.nv_main_navigation);
+        //导航布局
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nv_main_navigation);
         if (navigationView != null) {
-            setupDrawerContent(navigationView);
+            setNavigationViewClick(navigationView);
         }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Snackbar comes out", Snackbar.LENGTH_LONG)
-                        .setAction("Action", new View.OnClickListener() {
+                Snackbar.make(view, "Snackbar 内容", Snackbar.LENGTH_LONG)
+                        .setAction("点击", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 Toast.makeText(
                                         MainActivity.this,
-                                        "Toast comes out",
+                                        "Snackbar点击事件",
                                         Toast.LENGTH_SHORT).show();
                             }
                         }).show();
@@ -63,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager();
+        initViewPager();
 
     }
 
@@ -83,12 +86,12 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setupViewPager() {
+    private void initViewPager() {
         mTabLayout = (TabLayout) findViewById(R.id.tabs);
         List<String> titles = new ArrayList<>();
-        titles.add("Page One");
-        titles.add("Page Two");
-        titles.add("Page Three");
+        titles.add("新闻");
+        titles.add("视频");
+        titles.add("热点");
         mTabLayout.addTab(mTabLayout.newTab().setText(titles.get(0)));
         mTabLayout.addTab(mTabLayout.newTab().setText(titles.get(1)));
         mTabLayout.addTab(mTabLayout.newTab().setText(titles.get(2)));
@@ -103,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         mTabLayout.setTabsFromPagerAdapter(adapter);
     }
 
-    private void setupDrawerContent(NavigationView navigationView) {
+    private void setNavigationViewClick(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
